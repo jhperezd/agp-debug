@@ -18,29 +18,29 @@ class MainActivity : ComponentActivity() {
         setContent {
             AgpdebugTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    @Suppress("DEPRECATION")
+                    val info = application.packageManager.getPackageInfo(application.packageName, 0)
+                    ShowVersionCode(info.longVersionCode.toString())
                 }
             }
         }
+
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun ShowVersionCode(versionCode: String, modifier: Modifier = Modifier) {
     Text(
-        text = "Hello $name!",
+        text = "App Version Code: $versionCode",
         modifier = modifier
     )
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun ShowVersionCode() {
     AgpdebugTheme {
-        Greeting("Android")
+        ShowVersionCode("12345")
     }
 }
